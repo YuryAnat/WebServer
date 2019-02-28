@@ -1,8 +1,9 @@
 package services;
 
+import factorys.AbstractFactory;
+import factorys.Factory;
 import models.User;
 import repositories.UserRepository;
-import factorys.UserRepositoryFactory;
 
 import java.util.List;
 
@@ -11,7 +12,8 @@ public class UserServiceImpl implements UserService{
     private static UserService userService = null;
 
     private UserServiceImpl(){
-        userRepository = new UserRepositoryFactory().getRepository();
+        AbstractFactory factory = Factory.getFactory();
+        userRepository = factory.createUserRepository();
     }
 
     public static UserService getInstance(){

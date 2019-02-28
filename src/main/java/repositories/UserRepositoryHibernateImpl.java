@@ -21,10 +21,7 @@ public class UserRepositoryHibernateImpl implements UserRepository {
 
     @Override
     public boolean addUser(User user) {
-
-
         Session session = sessionFactory.openSession();
-
         int result = (Integer) session.save(user);
         session.close();
         return result > 0;

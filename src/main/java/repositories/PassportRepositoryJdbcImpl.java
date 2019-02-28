@@ -1,4 +1,4 @@
 package repositories;
 
-public class PassportRepositoryJdbcImpl {
+public class PassportRepositoryJdbcImpl implements PassportRepository{
 }
