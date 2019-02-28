@@ -1,10 +1,10 @@
 package exceptions;
 
-public class ReadPropertyException extends Throwable {
+public class ReadPropertyException extends RuntimeException {
     public ReadPropertyException(String message){
         super(message);
     }
-    public ReadPropertyException(String message, Exception e){
+    public ReadPropertyException(String message, Throwable e){
         super(message, e);
     }
 }

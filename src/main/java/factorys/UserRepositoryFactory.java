@@ -1,8 +1,9 @@
-package repositories;
+package factorys;
 
-import exceptions.ReadPropertyException;
-
-import java.io.IOException;
+import repositories.UserRepository;
+import repositories.UserRepositoryHibernateImpl;
+import repositories.UserRepositoryJdbcImpl;
+import utilities.ReadConfigFile;
 import java.util.Properties;
 
 public class UserRepositoryFactory {
@@ -10,11 +11,8 @@ public class UserRepositoryFactory {
     private UserRepository repository;
 
     public UserRepositoryFactory(){
-        try {
-            properties.load(UserRepositoryFactory.class.getResourceAsStream("/config.property"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ReadConfigFile readConfigFile = new ReadConfigFile();
+        properties = readConfigFile.getConfig();
     }
 
     public UserRepository getRepository() {

@@ -2,22 +2,23 @@ package connections;
 
 import models.User;
 import org.hibernate.cfg.Configuration;
+import utilities.ReadConfigFile;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class DBHelper {
-    private Properties properties = new Properties();
+    private Properties properties;
     private static DBHelper dbHelper;
 
     private DBHelper(){
-        try {
-            properties.load(DBHelper.class.getResourceAsStream("/config.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ReadConfigFile readConfigFile = new ReadConfigFile();
+        properties = readConfigFile.getConfig();
     }
 
     public static DBHelper getInstance(){

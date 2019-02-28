@@ -2,13 +2,13 @@ package services;
 
 import models.User;
 import repositories.UserRepository;
-import repositories.UserRepositoryFactory;
+import factorys.UserRepositoryFactory;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
-    private static UserServiceImpl userService = null;
+    private static UserService userService = null;
 
     private UserServiceImpl(){
         userRepository = new UserRepositoryFactory().getRepository();

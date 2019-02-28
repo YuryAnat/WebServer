@@ -1,20 +1,28 @@
 package repositories;
 
-import connections.HibernateConnection;
+import connections.DBHelper;
 import exceptions.DBException;
 import models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
+import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 public class UserRepositoryHibernateImpl implements UserRepository {
 
-    private static final SessionFactory sessionFactory = HibernateConnection.getSessionFactory();
+    private final SessionFactory sessionFactory;
+
+    public UserRepositoryHibernateImpl(){
+        DBHelper dbHelper = DBHelper.getInstance();
+        Configuration configuration = dbHelper.getConfiguration();
+        sessionFactory = configuration.buildSessionFactory();
+    }
 
     @Override
     public boolean addUser(User user) {
+
+
         Session session = sessionFactory.openSession();
 
         int result = (Integer) session.save(user);

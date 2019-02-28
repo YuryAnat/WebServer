@@ -1,9 +1,7 @@
 package repositories;
 
-import connections.JdbcConnection;
-import exceptions.DBException;
+import connections.DBHelper;
 import models.User;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,8 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     private Connection connection;
 
     public UserRepositoryJdbcImpl(){
-        connection = JdbcConnection.getConnection();
+        DBHelper dbHelper = DBHelper.getInstance();
+        connection = dbHelper.getConnection();
     }
 
     @Override
