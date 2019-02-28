@@ -7,8 +7,8 @@ import repositories.UserRepositoryFactory;
 import java.util.List;
 
 public class UserServiceImpl implements UserService{
+    private UserRepository userRepository;
     private static UserServiceImpl userService = null;
-    private UserRepository userRepository ;
 
     private UserServiceImpl(){
         userRepository = new UserRepositoryFactory().getRepository();

@@ -25,7 +25,6 @@ public class UserRepositoryFactory {
 //        }else {
 //            throw new ReadPropertyException("No properties type connections");
 //        }
-
         switch (properties.getProperty("typeConnection")){
             case "jdbc" :
                 repository = new UserRepositoryJdbcImpl();
