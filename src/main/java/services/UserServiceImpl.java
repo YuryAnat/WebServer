@@ -3,8 +3,6 @@ package services;
 import models.User;
 import repositories.UserRepository;
 import repositories.UserRepositoryFactory;
-import repositories.UserRepositoryHibernateImpl;
-import repositories.UserRepositoryJdbcImpl;
 
 import java.util.List;
 
