@@ -2,25 +2,25 @@ package services;
 
 import models.User;
 import repositories.UserRepository;
+import repositories.UserRepositoryFactory;
 import repositories.UserRepositoryHibernateImpl;
 import repositories.UserRepositoryJdbcImpl;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService{
-    private UserRepository userRepository = new UserRepositoryJdbcImpl();
-//    private UserRepository userRepository = new UserRepositoryHibernateImpl();
-
-    private static UserServiceImpl service;
+    private static UserServiceImpl userService = null;
+    private UserRepository userRepository ;
 
     private UserServiceImpl(){
+        userRepository = new UserRepositoryFactory().getRepository();
     }
 
     public static UserService getInstance(){
-        if (service == null){
+        if (userService == null){
             return new UserServiceImpl();
         }else {
-            return service;
+            return userService;
         }
     }
 
