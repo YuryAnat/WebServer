@@ -27,12 +27,13 @@ public class AddUserServlet extends HttpServlet {
         String confPassword = req.getParameter("confPassword");
         String name = req.getParameter("name");
         String email = req.getParameter("email");
+        String role = req.getParameter("role");
         if (service.getUserByLogin(login) == null){
             if (!password.equals(confPassword)){
                 req.setAttribute("errStatus", "Passwords do not match");
                 req.getRequestDispatcher("/addUser.jsp").forward(req,resp);
             }
-            service.addNewUser(new User(login,password,name,email));
+            service.addNewUser(new User(login,password,name,email,role));
             req.setAttribute("okStatus","User added");
             resp.sendRedirect("/list");
         }else {

@@ -36,11 +36,12 @@ public class EditUserServlet extends HttpServlet {
         String confPassword = req.getParameter("confPassword");
         String name = req.getParameter("name");
         String email = req.getParameter("email");
+        String role = req.getParameter("role");
         if (service.getUserByID(id) != null){
             if (password.equals(confPassword)){
                 //req.setAttribute("okStatus", "User " + login + " is edit");
                 req.getSession().setAttribute("okStatus", "User " + login + " is edit");
-                service.updateUser(new User(id,login,password,name,email));
+                service.updateUser(new User(id,login,password,name,email,role));
                 resp.sendRedirect("/list");
             }else {
                 //req.setAttribute("errStatus", "Passwords do not match");

@@ -22,6 +22,7 @@
             <th>login</th>
             <th>name</th>
             <th>email</th>
+            <th>role</th>
         </tr>
         <c:forEach items="${users}" var="user" >
             <tr>
@@ -29,6 +30,7 @@
                 <td>${user.login}</td>
                 <td>${user.name}</td>
                 <td>${user.email}</td>
+                <td>${user.role}</td>
                 <td>
                     <button onclick="location.href='/edit?id=${user.id}'">Edit user</button>
                 </td>

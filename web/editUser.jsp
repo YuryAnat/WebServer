@@ -32,6 +32,13 @@
             <label>eMail</label>
             <input name="email" value="${user.email}" type="email">
             <br>
+            <label>Role</label>
+            <select>
+                <option selected value ="user">user</option>
+                <option value="admin">admin</option>
+            </select>
+            <br>
+
         <div>
             <button type="submit" name="edit">Edit user</button>
         </div>

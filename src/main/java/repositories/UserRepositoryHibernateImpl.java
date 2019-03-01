@@ -35,17 +35,18 @@ public class UserRepositoryHibernateImpl implements UserRepository {
         try {
             transaction = session.beginTransaction();
             result = session.createQuery("update User set login = :login , password = :password, name = :name," +
-                    " email = :email where id = :id")
+                    " email = :email , role = :role where id = :id")
                     .setParameter("login", user.getLogin())
                     .setParameter("password", user.getPassword())
                     .setParameter("name", user.getName())
                     .setParameter("email", user.getEmail())
+                    .setParameter("role", user.getRole())
                     .setParameter("id", user.getId())
                     .executeUpdate();
             session.getTransaction().commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
-            throw new DBException("Dont update user: " + user.getLogin(), e);
+            throw new DBException("Don't update user: " + user.getLogin(), e);
         } finally {
             session.close();
         }

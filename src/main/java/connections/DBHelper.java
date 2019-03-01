@@ -44,7 +44,6 @@ public class DBHelper {
         configuration.setProperty("hibernate.connection.password", properties.getProperty("password"));
         configuration.setProperty("hibernate.show_sql", properties.getProperty("show_sql"));
         configuration.setProperty("hibernate.hbm2ddl.auto", properties.getProperty("hbm2ddl.auto"));
-        configuration.setProperty("hibernate.hbm2ddl.auto", properties.getProperty("hbm2ddl.auto"));
         configuration.addAnnotatedClass(User.class);
         return configuration;
     }

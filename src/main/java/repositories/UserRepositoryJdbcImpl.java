@@ -19,11 +19,12 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public boolean addUser(User user) {
         boolean status = false;
         try {
-            PreparedStatement statement = connection.prepareStatement("insert into users (login, password, name, email) values (?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("insert into users (login, password, name, email, role) values (?,?,?,?,?)");
             statement.setString(1,user.getLogin());
             statement.setString(2,user.getPassword());
             statement.setString(3,user.getName());
             statement.setString(4,user.getEmail());
+            statement.setString(5,user.getRole());
             int result = statement.executeUpdate();
             if (result > 0) status = true;
         } catch (SQLException e) {
@@ -37,12 +38,13 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         boolean status = false;
         try {
             PreparedStatement statement = connection.prepareStatement("update users set login = ?, password =?" +
-                    ", name = ?, email = ? where id=?");
-            statement.setInt(1,user.getId());
-            statement.setString(2,user.getLogin());
-            statement.setString(3,user.getPassword());
-            statement.setString(4,user.getName());
-            statement.setString(5,user.getEmail());
+                    ", name = ?, email = ?, role = ? where id=?");
+            statement.setString(1,user.getLogin());
+            statement.setString(2,user.getPassword());
+            statement.setString(3,user.getName());
+            statement.setString(4,user.getEmail());
+            statement.setString(5,user.getRole());
+            statement.setInt(6,user.getId());
             int result = statement.executeUpdate();
             if (result > 0) status = true;
         } catch (SQLException e) {
@@ -75,7 +77,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
             if (result.next()){
                 user = new User(result.getInt("id"),result.getString("login")
                         ,result.getString("password"),result.getString("name")
-                        ,result.getString("email"));
+                        ,result.getString("email"), result.getString("role"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,7 +95,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
             if (result.next()){
                 user = new User(result.getInt("id"),result.getString("login")
                         ,result.getString("password"),result.getString("name")
-                        ,result.getString("email"));
+                        ,result.getString("email"), result.getString("role"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,7 +112,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
             while (result.next()){
                 list.add(new User(result.getInt("id"),result.getString("login")
                         ,result.getString("password"),result.getString("name")
-                        ,result.getString("email")));
+                        ,result.getString("email"), result.getString("role")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
