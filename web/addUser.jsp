@@ -5,7 +5,6 @@
     <title>Add new user</title>
 </head>
 <body>
-<button onclick="location.href='/list'">List users</button><br>
 <div>
     <c:if test="not empty errStatus" var="status">
         <p>${status}</p>
@@ -32,13 +31,16 @@
             <input name="email" value="" type="email">
         <br>
             <label>Role</label>
-            <select>
+            <select name="role">
                 <option selected value="user">user</option>
                 <option value="admin">admin</option>
             </select>
         <br>
         <div>
             <button type="submit" name="add">Add user</button>
+        </div>
+        <div>
+            <button onclick="location.href='/admin'">Cancel</button>
         </div>
     </form>
 </div>

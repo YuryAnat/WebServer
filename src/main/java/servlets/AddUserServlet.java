@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/add")
+@WebServlet("/admin/add")
 public class AddUserServlet extends HttpServlet {
     private UserService service = UserServiceImpl.getInstance();
 
@@ -35,7 +35,7 @@ public class AddUserServlet extends HttpServlet {
             }
             service.addNewUser(new User(login,password,name,email,role));
             req.setAttribute("okStatus","User added");
-            resp.sendRedirect("/list");
+            resp.sendRedirect("/admin");
         }else {
             req.setAttribute("errStatus", "Login " + login + " is busy");
             req.getRequestDispatcher("/addUser.jsp").forward(req,resp);

@@ -6,7 +6,11 @@
     <title>List users</title>
 </head>
 <body>
-<div><button onclick="location.href='/add'">Add user</button><br></div>
+<div>
+    <button onclick="location.href='/admin/add'">Add user</button>
+    <button onclick="location.href='/logout'">Logout</button><br>
+</div>
+
 <div>
     <c:if test="not empty sessionScope.okStatus">
         <p>${sessionScope.okStatus}</p>
@@ -32,10 +36,10 @@
                 <td>${user.email}</td>
                 <td>${user.role}</td>
                 <td>
-                    <button onclick="location.href='/edit?id=${user.id}'">Edit user</button>
+                    <button onclick="location.href='/admin/edit?id=${user.id}'">Edit user</button>
                 </td>
                 <td>
-                    <button onclick="location.href='/delete?id=${user.id}'">Delete user</button>
+                    <button onclick="location.href='/admin/delete?id=${user.id}'">Delete user</button>
                 </td>
             </tr>
         </c:forEach>

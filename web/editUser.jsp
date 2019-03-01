@@ -5,7 +5,6 @@
     <title>Edit user</title>
 </head>
 <body>
-<button onclick="location.href='/list'">List users</button><br>
 <div>
     <c:if test="not empty sessionScope.errStatus">
         <c:out value="${sessionScope.errStatus}"/>
@@ -33,14 +32,16 @@
             <input name="email" value="${user.email}" type="email">
             <br>
             <label>Role</label>
-            <select>
+            <select name="role">
                 <option selected value ="user">user</option>
                 <option value="admin">admin</option>
             </select>
             <br>
-
         <div>
             <button type="submit" name="edit">Edit user</button>
+        </div>
+        <div>
+            <button onclick="location.href='/admin'">Cancel</button>
         </div>
     </form>
 </div>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/edit")
+@WebServlet("/admin/edit")
 public class EditUserServlet extends HttpServlet {
     private UserService service = UserServiceImpl.getInstance();
 
@@ -24,7 +24,7 @@ public class EditUserServlet extends HttpServlet {
             req.getRequestDispatcher("/editUser.jsp").forward(req,resp);
         }else {
             req.setAttribute("errStatus", "No user found");
-            resp.sendRedirect("/list");
+            resp.sendRedirect("/admin");
         }
     }
 
@@ -42,7 +42,7 @@ public class EditUserServlet extends HttpServlet {
                 //req.setAttribute("okStatus", "User " + login + " is edit");
                 req.getSession().setAttribute("okStatus", "User " + login + " is edit");
                 service.updateUser(new User(id,login,password,name,email,role));
-                resp.sendRedirect("/list");
+                resp.sendRedirect("/admin");
             }else {
                 //req.setAttribute("errStatus", "Passwords do not match");
                 req.getSession().setAttribute("errStatus", "Passwords do not match");

@@ -21,26 +21,19 @@ public class AuthorizationFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        UserService service = UserServiceImpl.getInstance();
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        User authUser = service.getUserByLogin(login);
-        if (request.getMethod().equalsIgnoreCase("post")){
-            if (authUser != null && authUser.getPassword().equals(password)){
-                if (authUser.getRole().equals("admin")){
-                    request.getSession().setAttribute("role","admin");
-                    response.sendRedirect("/list");
-                }else if (authUser.getRole().equals("user")){
-                    request.getSession().setAttribute("role","user");
+        if (request.getMethod().equalsIgnoreCase("get")) {
+            String role = (String) request.getSession().getAttribute("role");
+            if (role != null) {
+                if (role.equals("user")) {
                     response.sendRedirect("/user");
-                }else {
-                    response.sendRedirect("/");
+                }else if (role.equals("admin")) {
+                    response.sendRedirect("/admin");
                 }
             }else {
-                response.sendRedirect("/");
+                filterChain.doFilter(servletRequest, servletResponse);
             }
-        }else {
-            filterChain.doFilter(servletRequest,servletResponse);
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
